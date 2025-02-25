@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Forward SMS"
+rootProject.name = "VLBA"
 include ':app'

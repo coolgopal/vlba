@@ -20,17 +20,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/student_photo"
+        android:src="@drawable/swami_vivekananda"
         tools:visibility="visible" />
 
     <TextView
         android:id="@+id/textViewStudentNameLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="22dp"
         android:text="Name:"
         android:textStyle="normal"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/textViewStudentName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:text="Soumik Bera"
+        android:text="Swami Vivekananda"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,9 +55,10 @@
         android:id="@+id/textViewStudentClassLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:text="Class:"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStudentName" />
 
@@ -66,19 +69,21 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:text="Upper Nursery"
+        android:text="Hindu Monk"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewStudentName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewStudentName" />
 
     <TextView
         android:id="@+id/textViewStudentPhoneLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:text="Phone:"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStudentClassLogo" />
 
@@ -89,8 +94,9 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:text="9141230016"
+        android:text="0000000000"
         android:textStyle="bold"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStudentClass" />
@@ -99,9 +105,10 @@
         android:id="@+id/textViewStudentId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:text="Id:"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStudentPhoneLogo" />
 
@@ -121,7 +128,7 @@
         android:includeFontPadding="true"
         android:inputType="text"
         android:keepScreenOn="true"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStudentPhone" />

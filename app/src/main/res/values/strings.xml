@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Forward SMS</string>
+    <string name="app_name">VLBA</string>
+    <string name="nav_header_title_school_name">VIVEKANANDA LIFE-BUILDING ACADEMY</string>
+    <string name="nav_header_subtitle_school_kg">(K.G.)</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
