@@ -30,8 +30,9 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="22dp"
         android:text="Name:"
-        android:textStyle="normal"
         android:textSize="20sp"
+        android:textStyle="normal"
+        android:typeface="serif"
         app:layout_constraintEnd_toStartOf="@+id/textViewStudentName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +48,7 @@
         android:text="Swami Vivekananda"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewStudentPhoto" />
@@ -59,6 +61,7 @@
         android:layout_marginTop="25dp"
         android:text="Class:"
         android:textSize="20sp"
+        android:typeface="serif"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStudentName" />
 
@@ -69,9 +72,10 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:text="Hindu Monk"
+        android:text="Brave Heart"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStudentName" />
@@ -84,6 +88,7 @@
         android:layout_marginTop="25dp"
         android:text="Phone:"
         android:textSize="20sp"
+        android:typeface="serif"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStudentClassLogo" />
 
@@ -95,8 +100,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
         android:text="0000000000"
-        android:textStyle="bold"
         android:textSize="25sp"
+        android:textStyle="bold"
+        android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStudentClass" />
@@ -109,6 +115,7 @@
         android:layout_marginTop="25dp"
         android:text="Id:"
         android:textSize="20sp"
+        android:typeface="serif"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStudentPhoneLogo" />
 
@@ -129,6 +136,7 @@
         android:inputType="text"
         android:keepScreenOn="true"
         android:textSize="25sp"
+        android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStudentPhone" />
