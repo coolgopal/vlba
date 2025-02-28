@@ -4,11 +4,13 @@ public class Student {
     private String Id;
     private String name;
     private String phone;
+    private String studentclass;
 
-    public Student(String id, String name, String phone) {
+    public Student(String id, String name, String phone, String studentclass) {
         Id = id;
         this.name = name;
         this.phone = phone;
+        this.studentclass = studentclass;
     }
 
     public String getId() {
@@ -22,4 +24,5 @@ public class Student {
     public String getPhone() {
         return phone;
     }
+    public String getStudentClass() { return studentclass; }
 }

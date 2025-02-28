@@ -52,6 +52,7 @@ public class StudentDataServer {
         }
 
         String studentDataFilePath = context.getExternalFilesDir(null).toString() + // external files directory root path
+                File.separator + "data" + // data directory
                 File.separator + "student_data.csv"; // data file name
 
 //        String studentDataFilePath = "/storage/emulated/0/vlba/data/student_data.csv"; // data file name
@@ -79,8 +80,9 @@ public class StudentDataServer {
                 String id = stringParts[0];
                 String name = stringParts[1];
                 String phone = stringParts[2];
-                Student student = new Student(id, name, phone);
-                Log.d("VLBA", "ReadStudentData id= " + id + ", name= " + name + ", phone= " + phone);
+                String studentClass = stringParts[3];
+                Student student = new Student(id, name, phone, studentClass);
+                Log.d("VLBA", "ReadStudentData id= " + id + ", name= " + name + ", phone= " + phone + ", class= " + studentClass);
                 mapStudentData.put(id, student);
                 line = reader.readLine();
             }
