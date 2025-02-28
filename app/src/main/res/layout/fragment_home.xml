@@ -33,6 +33,7 @@
         android:textSize="20sp"
         android:textStyle="normal"
         android:typeface="serif"
+        android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintEnd_toStartOf="@+id/textViewStudentName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +50,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:typeface="serif"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewStudentPhoto" />
@@ -62,6 +64,7 @@
         android:text="Class:"
         android:textSize="20sp"
         android:typeface="serif"
+        android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStudentName" />
 
@@ -76,6 +79,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:typeface="serif"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStudentName" />
@@ -87,6 +91,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:text="Phone:"
+        android:textColor="@android:color/holo_orange_dark"
         android:textSize="20sp"
         android:typeface="serif"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,6 +108,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:typeface="serif"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewStudentClass" />
@@ -116,6 +122,7 @@
         android:text="Id:"
         android:textSize="20sp"
         android:typeface="serif"
+        android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStudentPhoneLogo" />
 
@@ -137,6 +144,7 @@
         android:keepScreenOn="true"
         android:textSize="25sp"
         android:typeface="serif"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewStudentPhone" />
