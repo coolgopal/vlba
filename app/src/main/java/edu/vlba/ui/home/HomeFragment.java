@@ -1,6 +1,8 @@
 package edu.vlba.ui.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -13,12 +15,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.io.File;
 
 import edu.vlba.databinding.FragmentHomeBinding;
 import edu.vlba.dataserver.Student;
@@ -36,7 +41,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final EditText editTextStudentId = binding.editTextStudentId;
+        EditText editTextStudentId = binding.editTextStudentId;
         editTextStudentId.requestFocus();
         editTextStudentId.setNextFocusDownId(editTextStudentId.getId());
         editTextStudentId.setInputType(InputType.TYPE_NULL);
@@ -56,15 +61,42 @@ public class HomeFragment extends Fragment {
                 String lastInputText = studentIdStr.isEmpty() ? "" : studentIdStr.substring(studentIdStr.length() - 1);
                 Log.d("VLBA", "afterTextChanged studentID = " + studentIdStr + " lastInputText = " + lastInputText);
                 if (studentIdStr.length() == 10) {
+                    StudentDataServer.getInstance().setCurrentStudentId(studentIdStr);
+                    Student currentStudent = StudentDataServer.getInstance().getCurrentStudentData();
+
+                    TextView textViewName = binding.textViewStudentName;
+                    textViewName.setText(currentStudent.getName());
+                    TextView textViewClass = binding.textViewStudentClass;
+                    textViewClass.setText(currentStudent.getStudentClass());
+                    TextView textViewPhone = binding.textViewStudentPhone;
+                    textViewPhone.setText(currentStudent.getPhone());
+
+                    ImageView imageViewPhoto = binding.imageViewStudentPhoto;
+                    try {
+                        String studentPhotoFileName = currentStudent.getName();
+                        studentPhotoFileName = studentPhotoFileName.toLowerCase();
+                        studentPhotoFileName = studentPhotoFileName.replaceAll(" ", "_");
+                        studentPhotoFileName += ".jpg";
+                        Log.d("VLBA", "studentPhotoFileName: " + studentPhotoFileName);
+                        String studentPhotoFilePath = getContext().getExternalFilesDir(null).toString() + // external files directory root path
+                                File.separator + "photo" + // photo directory
+                                File.separator + studentPhotoFileName; // photo file name
+                        Log.d("VLBA", "studentPhotoFilePath: " + studentPhotoFilePath);
+
+                        Bitmap bitmap = BitmapFactory.decodeFile(studentPhotoFilePath);
+                        imageViewPhoto.setImageBitmap(bitmap);
+                    } catch (Exception e)
+                    {
+                        Log.d("VLBA", "Exception: ", e);
+                    }
+
+
                     // request SMS permission
                     try {
-                        StudentDataServer.getInstance().setCurrentStudentId(studentIdStr);
-                        Student currentStudent = StudentDataServer.getInstance().getCurrentStudentData();
-
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(currentStudent.getPhone(), null, currentStudent.getName() + " has arrived to school.", null, null);
 
-                        // Try out SMS send using intent
+                        //TODO:  Try out SMS send using intent
 //                        Intent sendSmsIntent = new Intent(Intent.ACTION_VIEW);
 //                        sendSmsIntent.setDataAndType(Uri.parse("smsto:"), "vnd.android-dir/mms-sms");
 //                        sendSmsIntent.putExtra("address", "9141230016");
@@ -77,6 +109,8 @@ public class HomeFragment extends Fragment {
                     {
                         Toast.makeText(getContext(), "Send SMS Failed!!", Toast.LENGTH_LONG).show();
                     }
+
+                    //TODO: Speak out 'Welcome Student'
                 }
                 else if (studentIdStr.length() == 11) {
                     editable.clear();
