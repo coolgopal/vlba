@@ -3,13 +3,19 @@ package edu.vlba;
 import static java.security.AccessController.getContext;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.vlba.dataserver.Student;
 import edu.vlba.dataserver.StudentDataServer;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -22,6 +28,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
 
 import edu.vlba.databinding.ActivityMainBinding;
 
@@ -42,9 +50,12 @@ public class MainActivity extends AppCompatActivity {
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Student currentStudent = StudentDataServer.getInstance().getCurrentStudentData();
+
+                // request SMS permission
                 try {
                     SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage("9141230016", null, "Soumik has arrived to school.", null, null);
+                    smsManager.sendTextMessage(currentStudent.getPhone(), null, currentStudent.getName() + " has arrived to school.", null, null);
 
                     Snackbar.make(view, "SMS Sent", Snackbar.LENGTH_LONG).show();
                 } catch (Exception e) {
@@ -52,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
