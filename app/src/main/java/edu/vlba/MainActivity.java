@@ -2,12 +2,16 @@ package edu.vlba;
 
 import static java.security.AccessController.getContext;
 
+import android.accessibilityservice.AccessibilityService;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.SmsManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -32,6 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 
 import edu.vlba.databinding.ActivityMainBinding;
+import edu.vlba.services.WhatsAppAccessibilityService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        if (!isAccessibilityOn(getApplicationContext(), WhatsAppAccessibilityService.class))
+        {
+            Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -90,4 +101,34 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    private boolean isAccessibilityOn(Context context, Class<? extends AccessibilityService> clazz)
+    {
+        int accessibilityEnabled = 0;
+        final String service = context.getPackageName() + "/" + clazz.getCanonicalName();
+        try
+        {
+            accessibilityEnabled = Settings.Secure.getInt(context.getApplicationContext().getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED);
+        } catch (Settings.SettingNotFoundException ignored) {}
+
+        TextUtils.SimpleStringSplitter colonSplitter = new TextUtils.SimpleStringSplitter(':');
+        if (accessibilityEnabled == 1)
+        {
+            String settingValue = Settings.Secure.getString(context.getApplicationContext().getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+            if (settingValue != null)
+            {
+                colonSplitter.setString(settingValue);
+                while (colonSplitter.hasNext())
+                {
+                    String accessibilityService = colonSplitter.next();
+                    if (accessibilityService.equalsIgnoreCase(service)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
 }

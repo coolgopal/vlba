@@ -28,6 +28,8 @@ import java.io.File;
 import edu.vlba.databinding.FragmentHomeBinding;
 import edu.vlba.dataserver.Student;
 import edu.vlba.dataserver.StudentDataServer;
+import edu.vlba.messagesender.VLBASMSSender;
+import edu.vlba.messagesender.VLBAWhatsAppMessageSender;
 
 public class HomeFragment extends Fragment {
 
@@ -44,7 +46,7 @@ public class HomeFragment extends Fragment {
         EditText editTextStudentId = binding.editTextStudentId;
         editTextStudentId.requestFocus();
         editTextStudentId.setNextFocusDownId(editTextStudentId.getId());
-        editTextStudentId.setInputType(InputType.TYPE_NULL);
+//        editTextStudentId.setInputType(InputType.TYPE_NULL);
         editTextStudentId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -90,27 +92,23 @@ public class HomeFragment extends Fragment {
                         Log.d("VLBA", "Exception: ", e);
                     }
 
+                    String messageBody = "VLBA: " + currentStudent.getName() + " has arrived to school.";
+                    VLBAWhatsAppMessageSender messageSender = new VLBAWhatsAppMessageSender();
 
-                    // request SMS permission
-                    try {
-                        SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(currentStudent.getPhone(), null, currentStudent.getName() + " has arrived to school.", null, null);
-
-                        //TODO:  Try out SMS send using intent
-//                        Intent sendSmsIntent = new Intent(Intent.ACTION_VIEW);
-//                        sendSmsIntent.setDataAndType(Uri.parse("smsto:"), "vnd.android-dir/mms-sms");
-//                        sendSmsIntent.putExtra("address", "9141230016");
-//                        sendSmsIntent.putExtra("sms_body", "Soumik has arrived to school.");
-//                        startActivity(sendSmsIntent);
-
-                        Toast.makeText(getContext(), "SMS Sent", Toast.LENGTH_LONG).show();
-                    }
-                    catch (Exception e)
+                    if (messageSender.sendMessageToGuardian(getParentFragment(), currentStudent.getPhone(), messageBody))
                     {
-                        Toast.makeText(getContext(), "Send SMS Failed!!", Toast.LENGTH_LONG).show();
+                        try {
+                            Thread.sleep(2500);
+                        } catch (InterruptedException ignored) {}
+
+                        Toast.makeText(getContext(), "Message Sent", Toast.LENGTH_LONG).show();
+                    } else
+                    {
+                        Toast.makeText(getContext(), "Send Message Failed!!", Toast.LENGTH_LONG).show();
                     }
 
                     //TODO: Speak out 'Welcome Student'
+
                 }
                 else if (studentIdStr.length() == 11) {
                     editable.clear();
@@ -119,16 +117,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        editTextStudentId.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                int inputType = editTextStudentId.getInputType(); // backup the input type
-//                editTextStudentId.setInputType(InputType.TYPE_NULL); // disable soft input
-//                editTextStudentId.onTouchEvent(motionEvent); // call native handler
-//                editTextStudentId.setInputType(inputType);
-                return true; // consume touch event
-            }
-        });
+//        editTextStudentId.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+////                int inputType = editTextStudentId.getInputType(); // backup the input type
+////                editTextStudentId.setInputType(InputType.TYPE_NULL); // disable soft input
+////                editTextStudentId.onTouchEvent(motionEvent); // call native handler
+////                editTextStudentId.setInputType(inputType);
+//                return true; // consume touch event
+//            }
+//        });
 
         return root;
     }
