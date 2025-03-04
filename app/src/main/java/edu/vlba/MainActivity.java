@@ -37,6 +37,7 @@ import java.io.File;
 
 import edu.vlba.databinding.ActivityMainBinding;
 import edu.vlba.services.WhatsAppAccessibilityService;
+import edu.vlba.speaker.VLBASpeakerTTS;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         StudentDataServer.getInstance().initialize(getApplicationContext());
+        VLBASpeakerTTS.getInstance().initialize(getApplicationContext());
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override

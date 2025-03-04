@@ -30,6 +30,7 @@ import edu.vlba.dataserver.Student;
 import edu.vlba.dataserver.StudentDataServer;
 import edu.vlba.messagesender.VLBASMSSender;
 import edu.vlba.messagesender.VLBAWhatsAppMessageSender;
+import edu.vlba.speaker.VLBASpeakerTTS;
 
 public class HomeFragment extends Fragment {
 
@@ -93,9 +94,10 @@ public class HomeFragment extends Fragment {
                     }
 
                     String messageBody = "VLBA: " + currentStudent.getName() + " has arrived to school.";
-                    VLBAWhatsAppMessageSender messageSender = new VLBAWhatsAppMessageSender();
+//                    VLBAWhatsAppMessageSender messageSender = new VLBAWhatsAppMessageSender();
+                    VLBASMSSender messageSender = new VLBASMSSender();
 
-                    if (messageSender.sendMessageToGuardian(getParentFragment(), currentStudent.getPhone(), messageBody))
+                    if (messageSender.sendMessageToGuardian(getActivity(), currentStudent.getPhone(), messageBody))
                     {
                         try {
                             Thread.sleep(2500);
@@ -108,7 +110,7 @@ public class HomeFragment extends Fragment {
                     }
 
                     //TODO: Speak out 'Welcome Student'
-
+                    VLBASpeakerTTS.getInstance().playText("Welcome " + currentStudent.getName());
                 }
                 else if (studentIdStr.length() == 11) {
                     editable.clear();
